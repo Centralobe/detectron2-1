@@ -64,7 +64,7 @@ def register_dataset(path_to_data):
                             path_to_data + "/data")
 
 
-path_to_data = '/home/appuser/data/maize_dataset'
+path_to_data = '/home/appuser/data/maize_dataset/combi'
 register_dataset(path_to_data)
 
 dataloader.train.mapper.use_instance_mask = False
