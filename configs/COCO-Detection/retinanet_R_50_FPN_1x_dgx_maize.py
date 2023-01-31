@@ -1,7 +1,7 @@
 from ..common.optim import SGD as optimizer
 from ..common.coco_schedule import lr_multiplier_1x as lr_multiplier
 from ..common.data.coco import dataloader
-from ..common.models.fcos import model
+from ..common.models.retinanet import model
 from ..common.train import train
 from detectron2.data.datasets import register_coco_instances
 
@@ -34,8 +34,8 @@ dataloader.train = L(build_detection_train_loader)(
         image_format="BGR",
         use_instance_mask=True,
     ),
-    total_batch_size=4,
-    num_workers=4,
+    total_batch_size=32,
+    num_workers=18,
 )
 
 dataloader.test = L(build_detection_test_loader)(
@@ -47,7 +47,7 @@ dataloader.test = L(build_detection_test_loader)(
         ],
         image_format="${...train.mapper.image_format}",
     ),
-    num_workers=4,
+    num_workers=18,
 )
 
 dataloader.evaluator = L(COCOEvaluator)(
@@ -64,7 +64,7 @@ def register_dataset(path_to_data):
                             path_to_data + "/data")
 
 
-path_to_data = '/home/cmanss/data/maize_dataset'
+path_to_data = '/home/appuser/data/maize_dataset'
 register_dataset(path_to_data)
 
 dataloader.train.mapper.use_instance_mask = False
@@ -78,5 +78,5 @@ model.backbone.bottom_up.freeze_at = 2
 model.pixel_mean = [136.25, 137.81, 135.14]
 model.num_classes = 2
 
-train.output_dir = '/home/cmanss/Projects/Agri-Gaia/technical-development/AP 4.1/detectron2-1/logs'
+train.output_dir = '/home/appuser/logs'
 train.init_checkpoint = "detectron2://ImageNetPretrained/MSRA/R-50.pkl"

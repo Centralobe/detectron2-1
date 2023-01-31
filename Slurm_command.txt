@@ -1,0 +1,8 @@
+srun -K\
+    --job-name="train_maize_detector"\
+    --gpus=1 --cpus-per-gpu=18\
+    --container-mounts=/netscratch/$USER:/netscratch/$USER,"`pwd`":"`pwd`"\
+    --container-image=/netscratch/enroot/nvcr.io_nvidia_pytorch_22.07-py3.sqsh\
+    --container-workdir="`pwd`"\
+    --task-prolog=`pwd`/install.sh\
+    python3 tools/lazyconfig_train_net.py --config-file /home/manss/Agri-Gaia/detectron2/configs/COCO-Detection/fcos_R_50_FPN_1x_slurm_maize.py

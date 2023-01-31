@@ -64,7 +64,7 @@ def register_dataset(path_to_data):
                             path_to_data + "/data")
 
 
-path_to_data = '/home/cmanss/data/maize_dataset'
+path_to_data = '/netscratch/manss/data/maize_dataset'
 register_dataset(path_to_data)
 
 dataloader.train.mapper.use_instance_mask = False
@@ -78,4 +78,5 @@ model.backbone.bottom_up.freeze_at = 2
 model.pixel_mean = [136.25, 137.81, 135.14]
 model.num_classes = 2
 
+train.output_dir = '/netscratch/manss/Agri-Gaia/logs'
 train.init_checkpoint = "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
