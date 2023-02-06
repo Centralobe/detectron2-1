@@ -1,10 +1,12 @@
+import datetime
+
 from ..common.optim import SGD as optimizer
 from ..common.coco_schedule import lr_multiplier_1x as lr_multiplier
 from ..common.data.coco import dataloader
 from ..common.models.retinanet import model
 from ..common.train import train
 from detectron2.data.datasets import register_coco_instances
-
+import datetime
 from omegaconf import OmegaConf
 
 import detectron2.data.transforms as T
@@ -78,5 +80,6 @@ model.backbone.bottom_up.freeze_at = 2
 model.pixel_mean = [136.25, 137.81, 135.14]
 model.num_classes = 2
 
-train.output_dir = '/home/appuser/logs'
+d = str(datetime.date.today())
+train.output_dir = '/home/appuser/logs/' + f'maize_dataset/{d}_retinanet_R_50_FPN_1x'
 train.init_checkpoint = "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
