@@ -76,7 +76,8 @@ optimizer.lr = 0.01
 
 model.backbone.bottom_up.freeze_at = 2
 model.pixel_mean = [136.25, 137.81, 135.14]
-model.num_classes = 2
+model.roi_heads.num_classes = 2
+
 
 d = str(datetime.date.today())
 train.output_dir = '/home/appuser/logs/' + f'maize_dataset/{d}_faster_rcnn_R_50_FPN_1x'
