@@ -34,8 +34,8 @@ dataloader.train = L(build_detection_train_loader)(
         image_format="BGR",
         use_instance_mask=True,
     ),
-    total_batch_size=32,
-    num_workers=18,
+    total_batch_size=4,
+    num_workers=8,
 )
 
 dataloader.test = L(build_detection_test_loader)(
@@ -64,7 +64,7 @@ def register_dataset(path_to_data):
                             path_to_data + "/data")
 
 
-path_to_data = '/home/appuser/data/maize_dataset/combi'
+path_to_data = '/home/cmanss/data/maize_dataset'
 register_dataset(path_to_data)
 
 dataloader.train.mapper.use_instance_mask = False
@@ -82,6 +82,7 @@ del model.roi_heads.mask_in_features
 del model.roi_heads.mask_pooler
 del model.roi_heads.mask_head
 
+
 d = str(datetime.date.today())
-train.output_dir = '/home/appuser/logs/' + f'maize_dataset/{d}_faster_rcnn_R_50_FPN_1x'
+train.output_dir = '/home/cmanss/Projects/Agri-Gaia/technical-development/AP 4.1/detectron2-1/logs/' + f'maize_dataset/{d}_faster_rcnn_R_50_FPN_1x'
 train.init_checkpoint = "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
